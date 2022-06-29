@@ -11,13 +11,13 @@ docker build -t sample-api .
 
 ## Requirement before starting wotking with K8s
 
-check context : 
+check context :
 
 ```bash
 kubectl config get-contexts
 ```
 
-select context: 
+select context:
 
 ```bash
 kubectl config set-context docker-desktop
@@ -30,6 +30,7 @@ kubectl create namespace frontend
 ```
 
 Change Namespace :
+
 ```
 kubectl config set-context --current --namespace=frontend
 # Validate it
@@ -43,7 +44,7 @@ cd step2/
 kubectl apply -f deployment.yaml
 ```
 
-## Step 3 : Expose application 
+## Step 3 : Expose application
 
 ### Step 3.1 : create service
 
@@ -59,14 +60,14 @@ Install Nginx ingress controller:
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
 
-kubectl apply -f step3/ingress.yaml
+kubectl apply -f ingress.yaml
 
 ```
 
 ### step 3.3 : port forward
 
 ```bash
-kubectl port-forward services/frontend-svc 3000:3000  
+kubectl port-forward services/frontend-svc 3000:3000
 ```
 
 ## Step 4 : Configure application using configMap
@@ -75,7 +76,7 @@ Creat a configmap:
 
 ```bash
 cd step4/
-kubectl apply -f configmap.yml
+kubectl apply -f configmap.yaml
 ```
 
 ## Step 5 : Use secrets to secure confidential data
@@ -87,6 +88,7 @@ kubectl create secret generic redis-password --from-literal=redis-password=passw
 Note : uncomment and redeploy deployment in step 2, then check its status. You did it!
 
 ## Step 6 (Bonus) : Add HTML Content to the Application
-## Step 7 (Bonus) : Deploy Backend storage (Redis)
-## Step 8 (Bonus) : use Helm or kustomize
 
+## Step 7 (Bonus) : Deploy Backend storage (Redis)
+
+## Step 8 (Bonus) : use Helm or kustomize
